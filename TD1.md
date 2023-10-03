@@ -185,7 +185,7 @@ Vous respecterez les consignes ci-dessous :
    ```Java
     Fraction x = new Fraction(4,1);
     Fraction y = new Fraction(8,2);
-    assert x == y;
+    assert x.equals(y);
     ```
 1. Faites hériter votre classe `Fraction` de la classe [`java.lang.Number`](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Number.html) et complétez les méthodes
    ```Java
