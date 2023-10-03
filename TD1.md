@@ -17,52 +17,81 @@ Dans cet exercice, vous créerez une classe `Fraction` représentant un nombre r
 
 1. Sur la forge, créez le dépôt (_repository_) `SimpleFraction`;
 En terme de *commits*, quelle différence constatez-vous entre cocher une (ou plusieurs) des cases *Initialize this repository with* et n'en cocher aucune ?
-    > Répondre ici
+    > si on coche cette case, le dépot s'initialise avec un fichiers README
 
     *Pour la suite, ne cochez aucune de ces cases*.
 1. Localement, configurez `git` avec votre nom (`user.name`) et votre email (`user.email`) (cf. [Personnalisation de Git](https://git-scm.com/book/fr/v2/Personnalisation-de-Git-Configuration-de-Git));
     ```bash
-    # Répondre ici
+    git config --global user.name
+    git config --global user.email
     ```
 1. Initialisez le dépôt `git` local pour le projet (cf. [Démarrer un dépôt Git](https://git-scm.com/book/fr/v2/Les-bases-de-Git-D%C3%A9marrer-un-d%C3%A9p%C3%B4t-Git));
     ```bash
-    # Répondre ici
+    git init
     ```
 1. Dans votre IDE, créez la classe `Fraction` (vide pour le moment) et la classe `Main` (avec un simple affichage) dans le projet (cf. [Méthode `main`](https://docs.oracle.com/javase/specs/jls/se19/html/jls-12.html#jls-12.1.4));
 Vérifiez que le projet compile et s'exécute dans l'IDE;
 Validez les changements (cf. [Enregistrer des modifications dans le dépôt](https://git-scm.com/book/fr/v2/Les-bases-de-Git-Enregistrer-des-modifications-dans-le-d%C3%A9p%C3%B4t));
     ```bash
-    # Commandes pour valider les changements
+    fichier Fraction :
+    public class Fraction {
+    }
+
+    fichier Main :
+    public class Main {
+    public static void main(String[] args){
+        System.out.println("Hello !");
+        }
+    }
+
+    git commit -m "Fraction"
     ```
 1. Ajoutez la méthode `toString` à la classe `Fraction` (cf. [`Object.toString`](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Object.html#toString())) qui retournera la chaîne `"Je suis une fraction."` et modifiez la classe `Main` en conséquence;
 Validez les changements;
     ```Java
-    // Code pour tester toString
+    on ne peut pas appeler la fonction toString() car il existe déja une fonctioon native portant le même nom dans java
+
+    public class Fraction {
+    public static String quisuije(){
+        return "Je suis une fraction";
+        }
+    }
+
+    public class Main {
+    public static void main(String[] args){
+        String jesui = Fraction.quisuije();
+        System.out.println(jesui);
+        }
+    }
     ```
 1. Publiez vos modifications sur le dépôt distant (cf. [Travailler avec des dépôts distants](https://git-scm.com/book/fr/v2/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants));
 Vous utiliserez le protocole `https` pour cela;
 Vérifiez avec le navigateur;
     ```bash
-    # Commandes pour publier les modifications
+    git add -A
+    git commit -m "Premier depot"
+    git remote add Fractions https://github.com/uvsq21916099/Fractions.git
+    git push
     ```
 1. Sur la forge, ajoutez un fichier de documentation `README.md`.
 Quelle syntaxe est utilisée pour ce fichier ?
-    > Répondre ici
+    > un fichier markdown
 1. Récupérez localement les modifications effectuées sur la forge.
     ```bash
-    # Répondre ici
+    git log
     ```
 1. Ajoutez les répertoires et fichiers issus de la compilation aux fichiers ignorés par `git` (cf. [`.gitignore` pour Java](https://github.com/github/gitignore/blob/main/Java.gitignore));
     ```bash
-    # Copier ici le contenu de `.gitignore`
+    Fraction.class
+    Main.class
     ```
 1. Retirez les fichiers de configuration de l'IDE du projet;
     ```bash
-    # Répondre ici
+    VSCODE ne créé pas de fichiers
     ```
     Ajoutez-les aux fichiers ignorés par `git`.
     ```bash
-    # Copier ici les modifications de `.gitignore`
+    ref questions avant
     ```
 1. Configurez l'accès par clé publique/clé privée à la forge (cf. [Connecting to GitHub with SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)).
     > Expliquez la procédure de façon synthétique
@@ -77,38 +106,86 @@ Vous respecterez les consignes ci-dessous :
 
 1. Ajoutez les attributs représentants le numérateur et le dénominateur (nombres entiers).
     ```Java
-    // Déclaration des attributs
+    public class Fraction {
+        int denominateur;
+        int numerateur;
+    }
     ```
 1. Ajoutez les constructeurs (cf. [Constructor Declarations](https://docs.oracle.com/javase/specs/jls/se19/html/jls-8.html#jls-8.8)) suivants :
     * initialisation avec un numérateur et un dénominateur,
     * initialisation avec juste le numérateur (dénominateur égal à _1_),
     * initialisation sans argument (numérateur égal _0_ et dénominateur égal à _1_),
     ```Java
-    // Assertions pour tester les constructeurs (avec toString)
+    Fraction(int numerateur,int denominateur) {
+        this.numerateur = numerateur;
+        this.denominateur = denominateur;
+    }
+    Fraction(int numerateur) {
+        this.numerateur = numerateur;
+        this.denominateur = 1;
+    }
+    Fraction() {
+        this.numerateur = 0;
+        this.denominateur = 1;
+    }
+    public static String quisuije(){
+        return "Je suis une fraction";
+    }
+    
+    Fraction y = new Fraction(0,1);
+    Fraction x = new Fraction();
+    assert x.getNumerateur() == y.getNumerateur();
+    assert x.getDenominateur() == y.getDenominateur();
+
+    Fraction y1 = new Fraction(4,1);
+    Fraction x1 = new Fraction(4);
+    assert x1.getNumerateur() == y1.getNumerateur();
+    assert x1.getDenominateur() == y1.getDenominateur();
+
+
     ```
 1. Ajoutez les fractions constantes ZERO (0, 1) et UN (1, 1) (cf. [Constants in Java](https://www.baeldung.com/java-constants-good-practices)),
     ```Java
-    // Déclaration des constantes
+    final Fraction ZERO = new Fraction();
+    final Fraction UN = new Fraction(1);
     ```
 1. Ajoutez une méthode de consultation du numérateur et du dénominateur (par convention, en Java, une méthode retournant la valeur de l'attribut `anAttribute` est nommée `getAnAttribute`),
     ```Java
-    // Définition des getters
+    public int getNumerateur() {
+        return this.numerateur;
+    }
+
+    public int getDenominateur() {
+        return this.denominateur;
+    }
     ```
 1. Ajoutez une méthode de consultation de la valeur sous la forme d'un nombre en virgule flottante (méthode `doubleValue()`) (cf. [`java.lang.Number`](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Number.html)),
    ```Java
-    // Assertions pour tester la conversion
+    Fraction x = new Fraction(5,8);
+    assert x.doubleValue() == 0.625;
+
+
     ```
 1. Ajoutez une méthode permettant l'addition de deux fractions (la méthode `add` prend en paramètre *une* fraction et *retourne* la somme de la fraction courante et du paramètre),
    ```Java
-    // Assertions pour tester l'addition
+    Fraction x = new Fraction(2,4);
+    Fraction y = new Fraction(3,4);
+
+    Fraction p = new Fraction(5,4);
+
+    Fraction res = x.add(y);
+    assert res.doubleValue() == p.doubleValue();
     ```
 1. Ajoutez le test d'égalité entre fractions (deux fractions sont égales si elles représentent la même fraction réduite) (cf. [`java.lang.Object.equals`](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object))),
    ```Java
-    // Assertions pour tester l'égalité
+    assert x.doubleValue() == y.doubleValue();
+    
     ```
 1. Ajoutez la comparaison de fractions selon l'ordre naturel (cf. [`java.lang.Comparable`](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Comparable.html)).
    ```Java
-    // Assertions pour tester la comparaison
+    Fraction x = new Fraction(4,1);
+    Fraction y = new Fraction(8,2);
+    assert x == y;
     ```
 1. Faites hériter votre classe `Fraction` de la classe [`java.lang.Number`](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Number.html) et complétez les méthodes
    ```Java
